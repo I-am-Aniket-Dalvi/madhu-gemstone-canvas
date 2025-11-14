@@ -99,6 +99,20 @@ const HomePage = () => {
       {/* Why Choose Us */}
       <section className="py-24 bg-gradient-to-br from-[hsl(var(--pale-turquoise))]/20 to-[hsl(var(--light-green))]/20">
         <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">
+              Why Choose <span className="text-gradient-gold">MADHU MADE</span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              We're committed to excellence in every detail
+            </p>
+          </motion.div>
+
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
@@ -123,14 +137,117 @@ const HomePage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.2 }}
-                className="glass-effect p-8 rounded-2xl text-center hover:shadow-luxury smooth-transition"
+                whileHover={{ scale: 1.05 }}
+                className="glass-effect p-8 rounded-2xl text-center hover:shadow-luxury smooth-transition group"
               >
-                <item.icon className="w-12 h-12 mx-auto mb-4 text-[hsl(var(--gold))]" />
+                <motion.div
+                  whileHover={{ rotate: 360, scale: 1.2 }}
+                  transition={{ duration: 0.6 }}
+                  className="inline-block"
+                >
+                  <item.icon className="w-12 h-12 mx-auto mb-4 text-[hsl(var(--gold))] group-hover:text-[hsl(var(--bronze))] smooth-transition" />
+                </motion.div>
                 <h3 className="text-2xl font-serif font-bold mb-3">{item.title}</h3>
                 <p className="text-muted-foreground">{item.description}</p>
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">
+              What Our <span className="text-gradient-gold">Customers Say</span>
+            </h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Sarah Johnson",
+                review: "Absolutely in love with the quality! These candles have transformed my home into a luxurious sanctuary.",
+                rating: 5,
+              },
+              {
+                name: "Michael Chen",
+                review: "The attention to detail is incredible. Every product feels like a work of art. Highly recommend!",
+                rating: 5,
+              },
+              {
+                name: "Emma Davis",
+                review: "Best gift I've ever given. The hamper was beautifully packaged and the products are divine.",
+                rating: 5,
+              },
+            ].map((testimonial, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.2 }}
+                className="glass-effect p-8 rounded-2xl hover:shadow-luxury smooth-transition"
+              >
+                <div className="flex gap-1 mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-[hsl(var(--gold))] text-[hsl(var(--gold))]" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground mb-6 italic">"{testimonial.review}"</p>
+                <p className="font-semibold text-gradient-gold">- {testimonial.name}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 bg-gradient-to-br from-[hsl(var(--cream))] via-[hsl(var(--pale-turquoise))]/30 to-[hsl(var(--light-green))]/30 relative overflow-hidden">
+        <motion.div
+          className="absolute inset-0 opacity-10"
+          animate={{
+            backgroundPosition: ["0% 0%", "100% 100%"],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 20% 50%, hsl(var(--gold)) 0%, transparent 50%)",
+            backgroundSize: "200% 200%",
+          }}
+        />
+        
+        <div className="container mx-auto px-6 text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Sparkles className="w-16 h-16 mx-auto mb-6 text-[hsl(var(--gold))] animate-glow-pulse" />
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6">
+              Ready to Experience <span className="text-gradient-gold">Luxury?</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+              Join thousands of satisfied customers who have elevated their self-care routine
+            </p>
+            <Button
+              size="lg"
+              className="bg-[hsl(var(--gold))] hover:bg-[hsl(var(--bronze))] text-white px-12 py-6 text-lg smooth-transition hover:scale-105"
+              onClick={() => navigate("/products")}
+            >
+              Shop Now
+            </Button>
+          </motion.div>
         </div>
       </section>
     </div>
